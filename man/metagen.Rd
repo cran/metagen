@@ -1,83 +1,63 @@
 \name{metagen}
 \alias{metagen}
-\alias{metagen2}
-\title{Generalised Inference in the Random Effects Meta Regression Model}
+\title{Inference: Analysis of the data set}
 \usage{
-  metagen(y, d, x, sgnf = c(0.025, 0.05), numb = 1500L)
-
-  metagen2(y, d, s, x, sgnf = c(0.025, 0.05), numb = 1500L)
+  metagen(y, d, x, sgnf, s = NULL, n,
+    method = list("univariate", "multivariate"),
+    adjusted = FALSE)
 }
 \arguments{
-  \item{y}{[\code{numeric(k)}]\cr Vector of observed study
-  responses.}
+  \item{y}{: k-vector of responses.}
 
-  \item{d}{[\code{numeric(k)}]\cr Vector of
-  heteroscedasticity.}
+  \item{d}{: k-vector of heteroscedasticities.}
 
-  \item{x}{[\code{logical(1)}]\cr The design matrix.}
+  \item{x}{: design k-p-matrix.}
 
-  \item{sgnf}{[\code{numeric()}]\cr Significance level.
-  This can also be a vector of different significance
-  levels.  Please note that you will need to provide a
-  significance level here, not a confidence level.}
+  \item{sgnf}{: vector of significance levels.}
 
-  \item{numb}{[\code{integer(1)}]\cr Number of draws from
-  the distribution of the generalised pivotal quantity.
-  Usually, 1500-2000 is a good choice here.}
+  \item{s}{: k-vector of study responses. Default is NULL.
+  If 'adjusted=TRUE', this value needs to be given.}
 
-  \item{s}{[\code{integer(k)}]\cr Vector of total study
-  sizes.}
+  \item{n}{: draws from the pivotal distribution.}
+
+  \item{method}{: Default is 'list("univariate",
+  "multivariate")'.}
+
+  \item{adjusted}{: TRUE or FALSE}
 }
 \value{
-  [\code{list}].  \describe{ \item{confh
-  [\code{data.frame}]}{Confidence intervals for the
-  heterogeneity parameter.} \item{confr
-  [\code{data.frame}]}{Confidence intervals for the
-  regression coefficients.} \item{pointh
-  [\code{data.frame}]}{Point estimates of the heterogeneity
-  parameter.  One estimate is based on the median, the
-  other is based on the mean of the distribution of the
-  generalised pivotal quantity of the heterogeneity
-  parameter.} \item{pointr [\code{data.frame}]}{Point
-  estimates of the regression coefficients.  One estimate
-  is based on the median, the other is based on the mean of
-  the distribution of the generalised pivotal quantity of
-  the regression coefficients.} }
+  The same return type as the skeleton 'metagenEmpty()'.
 }
 \description{
-  Provides methods for making inference in the random
-  effects meta regression model, such as point estimates
-  and confidence intervals for the heterogeneity parameter
-  and the regression coefficients vector.
-}
-\details{
-  The function metagen assumes the model
-
-  Y ~ N_k(xb, [h]_k + [d])
-
-  where Y is a k-vector of study responses, N_k is a
-  k-variate Gaussian distribution, x is a design
-  k-p-matrix, h is a parameter of heterogeneity, [h]_k is
-  the diagonal matrix with h on the diagonal, d is a
-  k-vector of heteroscedasticity and [d] is the diagonal
-  matrix with (d_1,...,d_k) on the diagonal.
-
-  The function metagen2 assumes the model
-
-  Y ~ N_k(xb, [h]_k + [D])\cr D_j = K_j d_j\cr K_j / (s_j -
-  1) ~ Chisq(s_j-1)
-
-  where D=(D_1,...,D_k), n_j is the total number of
-  subjects in study j and Chisq(n_j-1) as a Chi-Square
-  distribution with (n_j - 1) degrees of freedom.
+  Runs all implemented methods and combines them in a neat
+  summary.
 }
 \examples{
-library(metafor)
-data(dat.bcg)
-dat <- escalc(measure="RR", ai=tpos, bi=tneg, ci=cpos, di=cneg, data=dat.bcg, append=TRUE)
-res <- metagen(y=dat$yi, d=dat$vi, x=cbind(1, dat$ablat))
+bcg   <- bcgVaccineData()
+bcg_y <- bcg$logrisk
+bcg_d <- bcg$sdiv
+bcg_x <- cbind(1,bcg$x)
+sgnf_lev <- c(0.01, 0.025, 0.05, 0.01)
 
-sizes <- dat$tpos + dat$tneg + dat$cpos + dat$cneg
-res2 <- metagen2(y=dat$yi, d=dat$vi, s=sizes, x=cbind(1, dat$ablat))
+set.seed(865287113) # for reproducibility
+
+# Runs a standard analysis, use n=1000 in an actual
+# analysis instead!
+m1 <- metagen(y=bcg_y, d=bcg_d, x=bcg_x, sgnf=0.025, n=50)
+m2 <- metagen(y=bcg_y, d=bcg_d, x=bcg_x, sgnf=sgnf_lev, n=50)
+
+# Runs the methods based on generalised principles via an
+# adjustment for the unknown heteroscedasticity.  Use
+# n=1000 in an actual analysis instead!!
+bcg_s <- bcg$size
+m3 <- metagen(y=bcg_y, d=bcg_d, x=bcg_x, sgnf=0.025, s=bcg_s, n=50,
+  adj=TRUE)
+m4 <- metagen(y=bcg_y, d=bcg_d, x=bcg_x, sgnf=sgnf_lev, s=bcg_s,
+  n=50, adj=TRUE)
+
+if (!all(names(m1) == names(metagenEmpty()))) stop("Name clash")
+if (!all(names(m2) == names(metagenEmpty()))) stop("Name clash")
+if (!all(names(m3) == names(metagenEmpty()))) stop("Name clash")
+if (!all(names(m4) == names(metagenEmpty()))) stop("Name clash")
 }
 
