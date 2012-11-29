@@ -77,7 +77,7 @@ designY <- function(  n # resolution
 #' using the 'lhs' package in a predefined parameter cube.
 #'
 #' @param n resolution of the heterogeneity and heteroscedasticity
-#' parameters, i.e. the number of of different (heterogeneity,
+#' parameters, i.e., the number of of different (heterogeneity,
 #' heteroscedasticity, sizes) tuple in the design.
 #' @param h_bounds bounds of the heterogeneity.
 #' @param d_bounds bounds of the heteroscedasticity.
@@ -122,12 +122,12 @@ designD <- function(  n # resolution
 #' Design: Binomial responses
 #'
 #' Method for generating a sampling design for data generation
-#' following a Binomial-Gaussian model.
+#' following a binomial-Gaussian model.
 #'
 #' Generates a sampling design for the heterogeneity 'h', balancing
 #' factors 'a1', ..., 'ak' of group assignments, and study sizes 's1',
 #' ..., 'sk'.  This design can be used for testing methods for inference
-#' for the random effects meta regression model, since the logarithm of
+#' for the random effects meta regression model since the logarithm of
 #' relative risks of each study is approximately Gaussian distributed.
 #' One may use methods that adjust for uncertainty in the
 #' heteroscedasticity estimates by additionally considering the size of
@@ -185,28 +185,30 @@ designB <- function(  n
 
 #' Data generation: Sampling data of clinical trials
 #'
-#' A random draw of a hierarchical Binomial Gaussian model.
+#' A random draw of a hierarchical binomial Gaussian model.
 #'
-#' We always assume at least one response in a study has happend,
-#' i.e. a response of 0 in a treatment or control group is rounded up
-#' to 1.  Note that this may lead to an overestimation of small risks.
+#' It is always assumed that at least one response in a study has
+#' happend, i.e., a response of 0 in a treatment or control group is
+#' rounded up to 1.  Note that this may lead to an overestimation of
+#' small risks.  If possible, make sure your sample sizes are large
+#' enough to compensate for this effect.
 #'
 #' You may work around this by increasing study sizes.
-#' @param h heterogeneity
-#' @param s study sizes
-#' @param a balance of group assignments
-#' @param r fixed risk in the control group
-#' @param x design matrix
-#' @param b regression coefficients
+#' @param h heterogeneity.
+#' @param s study sizes.
+#' @param a balance of group assignments.
+#' @param r fixed risk in the control group.
+#' @param x design matrix.
+#' @param b regression coefficients.
 #' @return A list containing the risk and a data frame with the studies.
 #' @examples
 #' h_test <- .03
-#' x_test <- cbind(1,1:13)
-#' b_test <- c(0.02, 0.03)
 #' s_test <- rep(2000, 13)
 #' a_test <- rep(.3, 13)
-#' dat <- rBinomGauss(  h=h_test, s=s_test, a=a_test, r=0.03
-#'             , x=x_test, b=b_test)$study
+#' x_test <- cbind(1,1:13)
+#' b_test <- c(0.02, 0.03)
+#' dat <- rBinomGauss(h=h_test, s=s_test, a=a_test, r=0.03 , x=x_test,
+#' b=b_test)$study
 #'
 #' if(!all(dim(dat) == c(dim(x_test)[1], 4))) stop("Wrong dimension")
 #' @export
@@ -255,8 +257,8 @@ yvec <- function(study) {
 
 #' Data generation: Sampling data of clinical trials
 #'
-#' Calculates the variance estimate of log risk ratios
-#' from a study in the right format.
+#' Calculates the variance estimate of log risk ratios from a study in
+#' the right format.  See the example below for details.
 #'
 #' @param study Study data of a clinical trial with
 #' binomial outcomes.
@@ -272,10 +274,7 @@ yvec <- function(study) {
 #' yvec(test)
 #' dvec(test)
 dvec <- function(study) {
-    return(1/study[,1]
-           + 1/study[,3]
-           - 1/(study[,1] + study[,2])
-           - 1/(study[,3]+ study[,4]))
+    return((1/study[,1]) - (1/(study[,1] + study[,2])) + (1/study[,3]) - (1/(study[,3]+ study[,4])))
 }
 
 #' Data generation: Gaussian-Gaussian model
@@ -284,11 +283,11 @@ dvec <- function(study) {
 #' of a random effects meta regression model.  Each column is
 #' an independent draw.
 #'
-#' @param n number of draws
-#' @param h heterogeneity
-#' @param d heteroscedasticity
-#' @param x design matrix
-#' @param b regression coefficients
+#' @param n number of draws.
+#' @param h heterogeneity.
+#' @param d heteroscedasticity.
+#' @param x design matrix.
+#' @param b regression coefficients.
 #' @return A (k,n)-matrix.  Each column is an independent draw.
 #' @examples
 #' x_test = cbind(1,1:13)
@@ -315,9 +314,9 @@ rY <- function(  n # number of draws
 #' response. Thus D = (d * X) / (s-1) where X is chi-squared
 #' distributed.
 #'
-#' @param n number of draws
-#' @param d heteroscedasticity
-#' @param s study sizes
+#' @param n number of draws.
+#' @param d heteroscedasticity.
+#' @param s study sizes.
 #' @return A (k,n)-matrix.  Each column is an independent draw.
 #' @examples
 #' d_test = rchisq(13, df=0.02)
@@ -331,26 +330,32 @@ rD <- function(  n # number of draws
     return(matrix(d * rchisq(n*length(s), df=(s-1)) / (s-1), ncol=n))
 }
 
-#' Data generation: Log-risk-ration of a Binomial-Gaussian model
+#' Data generation: Log-risk-ration of a binomial-Gaussian model
 #'
-#' Random draws of log risk ratios from a hierarchical Binomial
+#' Random draws of log risk ratios from a hierarchical binomial
 #' Gaussian model.
 #'
-#' Same comment applies as in the function 'rBinomGauss'.
+#' It is always assumed that at least one response in a study has
+#' happend, i.e., a response of 0 in a treatment or control group is
+#' rounded up to 1.  Note that this may lead to an overestimation of
+#' small risks.  If possible, make sure your sample sizes are large
+#' enough to compensate for this effect.
 #'
-#' @param n number of draws
-#' @param h heterogeneity
-#' @param s study sizes
-#' @param a balance of group assignments
-#' @param r fixed risk in the treatment group
-#' @param x design matrix
-#' @param b regression coefficients
+#' @param n number of draws.
+#' @param h heterogeneity.
+#' @param s study sizes.
+#' @param a balance of group assignments.
+#' @param r fixed risk in the treatment group.
+#' @param x design matrix.
+#' @param b regression coefficients.
 #' @return A (2k,n) matrix.  Each column is an independent draw.
-#' x_test <- cbind(1,1:13)
+#' @examples
 #' h_test <- .03
-#' a_test <- runif(13, min-.3, max=.3)
+#' x_test <- cbind(1,1:13)
 #' b_test <- c(0.02, 0.03)
-#' rB(n=10, h=h_test, a=a_test, r=.3, x=x_test, b=b_test)
+#' s_test <- rep(2000, 13)
+#' a_test <- rep(.3, 13)
+#' rB(n=10, h=h_test, s=s_test, a=a_test, r=.3, x=x_test, b=b_test)
 #' @export
 rB <- function(  n # number of draws
                , h # heterogeneity

@@ -6,7 +6,7 @@
 }
 \arguments{
   \item{n}{resolution of the heterogeneity and
-  heteroscedasticity parameters, i.e. the number of of
+  heteroscedasticity parameters, i.e., the number of of
   different (heterogeneity, heteroscedasticity, sizes)
   tuple in the design.}
 

@@ -28,9 +28,7 @@
 #' @param b regression coefficients.
 #' @param sgnf significance levels.
 #' @param piv_draws privotal draws.
-#' @return Data frame of accumulated analysis of random data
-#' drawn independend from the respeced random effects meta
-#' regression model.
+#' @return Data frame of accumulated performance results.
 #' @examples
 #' h_test <- 0.03
 #' x_test <- cbind(1,1:7)
@@ -80,9 +78,7 @@ experimentY <- function(  n # number of draws
 #' @param b regression coefficients.
 #' @param sgnf significance levels.
 #' @param piv_draws privotal draws.
-#' @return Data frame of accumulated analysis of random data
-#' drawn independend from the respeced random effects meta
-#' regression model.
+#' @return Data frame of accumulated performance measures.
 #' @examples
 #' h_test <- 0.03
 #' x_test <- cbind(1,1:7)
@@ -259,16 +255,14 @@ performancePointH <- function (  point # accumulated point estimates.
 #'
 #' Adding performance measures to the results
 #'
-#' Calculating performance measurements from
-#' a computer experiment for analysis data
-#' from a random effects meta regression model.
+#' Calculating performance measurements from a computer experiment.
 
 #' @param results Needs to be of the same type as, for example, the
 #' return value of the computer experiments 'experimentY',
 #' 'experimentD'.
-#' @param b true regression coefficients
-#' @param h true heterogeneity
-#' @return Data frame containing performance measuments of inference
+#' @param b true regression coefficients.
+#' @param h true heterogeneity.
+#' @return Data frame containing performance measurements of inference
 #' methods based on the results of the computer experiment given by
 #' 'results'.
 #' @examples

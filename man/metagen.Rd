@@ -7,20 +7,20 @@
     adjusted = FALSE)
 }
 \arguments{
-  \item{y}{: k-vector of responses.}
+  \item{y}{k-vector of responses.}
 
-  \item{d}{: k-vector of heteroscedasticities.}
+  \item{d}{k-vector of heteroscedasticities.}
 
-  \item{x}{: design k-p-matrix.}
+  \item{x}{design k-p-matrix.}
 
-  \item{sgnf}{: vector of significance levels.}
+  \item{sgnf}{vector of significance levels.}
 
-  \item{s}{: k-vector of study responses. Default is NULL.
-  If 'adjusted=TRUE', this value needs to be given.}
+  \item{s}{k-vector of study responses. Default is NULL. If
+  'adjusted=TRUE', this value needs to be given.}
 
-  \item{n}{: draws from the pivotal distribution.}
+  \item{n}{draws from the pivotal distribution.}
 
-  \item{method}{: Default is 'list("univariate",
+  \item{method}{Default is 'list("univariate",
   "multivariate")'.}
 
   \item{adjusted}{: TRUE or FALSE}

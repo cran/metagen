@@ -42,8 +42,9 @@
 \description{
   Algorithm for generating a steam of generalised pivotal
   quantities for the regression coefficients.  If
-  adjusted=FALSE, then not adjusting for uncertainty in the
-  heteroscedasticity estimates d. If adjusted=TRUE, then
-  adjusted.  In this case, 's' need to be provided.
+  adjusted=FALSE, then no adjustments are made for the
+  uncertainty in the heteroscedasticity estimates d.  If
+  adjusted=TRUE, then adjustments are performed.  In this
+  case, 's' needs to be provided.
 }
 

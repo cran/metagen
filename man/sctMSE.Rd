@@ -8,12 +8,12 @@
   \item{res}{The collected results from a computer
   experiment.}
 
-  \item{...}{further argumets to scale_y_continuous}
+  \item{...}{further arguments to scale_y_continuous}
 }
 \value{
   A plot object.
 }
 \description{
-  Plotting performance: Scatter plots against heterogeneity
+  Scatter plots of heterogeneity and mean squared error.
 }
 

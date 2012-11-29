@@ -12,6 +12,6 @@
   A plot object.
 }
 \description{
-  Plotting performance: Box plots for mean squared error
+  Box plots for mean squared error.
 }
 

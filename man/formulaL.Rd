@@ -5,18 +5,18 @@
   formulaL(y, d, h, g, x)
 }
 \arguments{
-  \item{y}{k-vector of responses}
+  \item{y}{k-vector of responses.}
 
-  \item{d}{k-vector of heteroscedasticity}
+  \item{d}{k-vector of heteroscedasticity.}
 
-  \item{h}{scalar of heterogeneity}
+  \item{h}{scalar of heterogeneity.}
 
-  \item{g}{p-vector of some p-variate Gaussian draw}
+  \item{g}{p-vector of some p-variate Gaussian draw.}
 
-  \item{x}{design k-p-matrix}
+  \item{x}{design k-p-matrix.}
 }
 \value{
-  A p-vector
+  A p-vector.
 }
 \description{
   Calculate pivotal quantities for the regression

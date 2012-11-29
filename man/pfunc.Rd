@@ -15,7 +15,7 @@
   A vector valued function.
 }
 \description{
-  Returns the p-function. (fastest version tested)
+  Returns the p-function.
 }
 \examples{
 bcg   <- bcgVaccineData()

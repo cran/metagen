@@ -22,9 +22,7 @@
   \item{piv_draws}{privotal draws.}
 }
 \value{
-  Data frame of accumulated analysis of random data drawn
-  independend from the respeced random effects meta
-  regression model.
+  Data frame of accumulated performance measures.
 }
 \description{
   Runs a computer experiment that evaluates the performance

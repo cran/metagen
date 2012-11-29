@@ -52,11 +52,11 @@ g3 <- metagenGeneralised(y=bcg_y, d=bcg_d, x=bcg_x, sgnf=0.025,
 g4 <- metagenGeneralised(y=bcg_y, d=bcg_d, x=bcg_x, sgnf=sgnf_lev,
   s=bcg_s, n=50, adj=TRUE)
 
-# The implementation can also handle the case, in which
-# a meta regression is planed with no intercept, and only a
+# The implementation can also handle the case in which
+# a meta regression is planed with no intercept and only a
 # single covariate (i.e. dim(x) = 1).  In this case,
 # the design matrix can simply be provided by a vector.
-# (This makes no sense in this example and shall only proofs
+# (This makes no sense in this example and shall only proves
 # feasibility)
 g5 <- metagenGeneralised(y=bcg_y, d=bcg_d, x=bcg$x, sgnf=0.025, n=50)
 

@@ -20,7 +20,7 @@
 
 #' Colour palettes for colour blind people
 #'
-#' The palette with grey
+#' The palette with grey.
 #'
 #' This palette is directly taken from
 #'
@@ -38,7 +38,7 @@ cbgPalette <- c("#999999", "#E69F00", "#56B4E9", "#009E73"
 
 #' Colour palettes for colour blind people
 #'
-#' The palette with grey
+#' The palette with black.
 #'
 #' This palette is directly taken from
 #'
@@ -60,14 +60,16 @@ cbbPalette <- c("#000000", "#E69F00", "#56B4E9", "#009E73"
 
 #' Render plot: To PDF
 #'
-#' Renders obj into a pdf-file of name: path++name.
+#' Renders obj into a pdf-file of name: path++name.  Neat feature is
+#' that the default size in A4.  Simply use the `scale` parameter to
+#' adjust the size of the plot to a fraction of a page.
 #'
-#' @param name Self explenatory
-#' @param plotObj Self explenatory
-#' @param path Self explenatory
-#' @param scale Self explenatory
-#' @param height Self explenatory
-#' @param width Self explenatory
+#' @param name Should be self explanatory.
+#' @param plotObj Should be self explanatory.
+#' @param path Should be self explanatory.
+#' @param scale Should be self explanatory.
+#' @param height Should be self explanatory.
+#' @param width Should be self explanatory.
 #' @export
 render <- function(  name, plotObj, path, scale=1
                    , height=11.6, width=8.2) {
@@ -80,14 +82,17 @@ render <- function(  name, plotObj, path, scale=1
 
 #' Render plot: To SVG
 #'
-#' Renders obj into a svg-file of name: path++name.
+#' Renders obj into a svg-file of name: path++name.  Neat feature is
+#' that the default size in A4.  Simply use the `scale` parameter to
+#' adjust the size of the plot to a fraction of a page.
 #'
-#' @param name Self explenatory
-#' @param plotObj Self explenatory
-#' @param path Self explenatory
-#' @param scale Self explenatory
-#' @param height Self explenatory
-#' @param width Self explenatory
+#'
+#' @param name Should be self explanatory.
+#' @param plotObj Should be self explanatory.
+#' @param path Should be self explanatory.
+#' @param scale Should be self explanatory.
+#' @param height Should be self explanatory.
+#' @param width Should be self explanatory.
 #' @export
 renderSVG <- function(  name, plotObj, path, scale=1
                       , height=11.6, width=8.2) {

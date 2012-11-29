@@ -7,7 +7,7 @@
   cbbPalette
 }
 \description{
-  The palette with grey
+  The palette with black.
 }
 \details{
   This palette is directly taken from

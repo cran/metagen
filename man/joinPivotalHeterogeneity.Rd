@@ -5,9 +5,9 @@
   joinPivotalHeterogeneity(p0 = NULL, p1 = NULL)
 }
 \arguments{
-  \item{p0}{pivotal stream without adjustment}
+  \item{p0}{pivotal stream without adjustment.}
 
-  \item{p1}{pivatal stream with adjustment}
+  \item{p1}{pivatal stream with adjustment.}
 }
 \description{
   Pivotal distributions: Extract pivots for heterogeneity

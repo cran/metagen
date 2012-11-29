@@ -5,15 +5,15 @@
   rY(n, h, d, x, b)
 }
 \arguments{
-  \item{n}{number of draws}
+  \item{n}{number of draws.}
 
-  \item{h}{heterogeneity}
+  \item{h}{heterogeneity.}
 
-  \item{d}{heteroscedasticity}
+  \item{d}{heteroscedasticity.}
 
-  \item{x}{design matrix}
+  \item{x}{design matrix.}
 
-  \item{b}{regression coefficients}
+  \item{b}{regression coefficients.}
 }
 \value{
   A (k,n)-matrix.  Each column is an independent draw.

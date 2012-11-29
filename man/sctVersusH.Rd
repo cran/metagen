@@ -5,8 +5,8 @@
   sctVersusH(res)
 }
 \arguments{
-  \item{res}{: The collected interval results from a
-  computer experiment.}
+  \item{res}{The collected interval results from a computer
+  experiment.}
 }
 \value{
   A plot object.

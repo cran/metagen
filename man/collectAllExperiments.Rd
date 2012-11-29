@@ -1,6 +1,6 @@
 \name{collectAllExperiments}
 \alias{collectAllExperiments}
-\title{Running a computer experiment in batch mode}
+\title{Running a computer experiment -- Collect all the results}
 \usage{
   collectAllExperiments(reg)
 }
@@ -9,10 +9,9 @@
   'makeExperimentRegistry'.}
 }
 \value{
-  List of data frame containing the performance measures of
-  all point and interval estimates for the heterogeneity
-  and the regression coefficients. collection shall be
-  performed.
+  List of data frames containing the performance measures
+  of all point and interval estimates for the heterogeneity
+  and the regression coefficients.
 }
 \description{
   Collects all the results of all finished experiments in

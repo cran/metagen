@@ -10,7 +10,8 @@
 }
 \description{
   Calculates the variance estimate of log risk ratios from
-  a study in the right format.
+  a study in the right format.  See the example below for
+  details.
 }
 \examples{
 h_test <- .03

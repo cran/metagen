@@ -1,6 +1,6 @@
 \name{collectExperiments}
 \alias{collectExperiments}
-\title{Running a computer experiment in batch mode}
+\title{Running a computer experiment -- Collect specific results}
 \usage{
   collectExperiments(reg, pattern)
 }
@@ -12,12 +12,12 @@
   for which the collection shall be performed.}
 }
 \value{
-  List of data frame containing the performance measures of
-  all point and interval estimates for the heterogeneity
+  List of data frames containing the performance measures
+  of all point and interval estimates for the heterogeneity
   and the regression coefficients.
 }
 \description{
-  Collects the results of all finished experiments in the
-  given registry for a given pattern.
+  Collects specific results of all finished experiments in
+  the given registry for a given pattern.
 }
 

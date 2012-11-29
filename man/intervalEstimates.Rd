@@ -5,15 +5,15 @@
   intervalEstimates(y, d, h_dat, x, sgnf)
 }
 \arguments{
-  \item{y}{study responses}
+  \item{y}{study responses.}
 
-  \item{d}{heteroscedasticity}
+  \item{d}{heteroscedasticity.}
 
-  \item{h_dat}{data frame of tau estimates}
+  \item{h_dat}{data frame of tau estimates.}
 
-  \item{x}{design matrix}
+  \item{x}{design matrix.}
 
-  \item{sgnf}{significance levels}
+  \item{sgnf}{significance levels.}
 }
 \description{
   Interval estimates: For the regression coefficients

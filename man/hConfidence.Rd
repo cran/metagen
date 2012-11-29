@@ -6,13 +6,13 @@ maximum likelihood.}
   hConfidence(y, d, x, sgnf)
 }
 \arguments{
-  \item{y}{k-vector of study responses}
+  \item{y}{k-vector of study responses.}
 
-  \item{d}{k-vector of heteroscedasticity}
+  \item{d}{k-vector of heteroscedasticity.}
 
-  \item{x}{design k-p-matrix}
+  \item{x}{design k-p-matrix.}
 
-  \item{sgnf}{significance levels}
+  \item{sgnf}{significance levels.}
 }
 \value{
   A data frame containing the bounds of the interval

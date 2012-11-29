@@ -5,11 +5,11 @@
   rD(n, d, s)
 }
 \arguments{
-  \item{n}{number of draws}
+  \item{n}{number of draws.}
 
-  \item{d}{heteroscedasticity}
+  \item{d}{heteroscedasticity.}
 
-  \item{s}{study sizes}
+  \item{s}{study sizes.}
 }
 \value{
   A (k,n)-matrix.  Each column is an independent draw.

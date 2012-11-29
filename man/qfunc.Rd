@@ -15,11 +15,7 @@
   A vector valued function.
 }
 \description{
-  Returns the q-function, in the form of the so-far fastest
-  version tested.
-}
-\details{
-  FIXME: Performance may be improved further!
+  Returns the q-function.
 }
 \examples{
 bcg   <- bcgVaccineData()

@@ -5,7 +5,7 @@
   sdsByType(res)
 }
 \arguments{
-  \item{res}{: The collected results from a computer
+  \item{res}{The collected results from a computer
   experiment.}
 }
 \value{

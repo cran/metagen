@@ -20,6 +20,8 @@
 
 #' Plotting performance: Box plots for mean squared error
 #'
+#' Box plots for mean squared error.
+#'
 #' @param res The collected results from a computer experiment.
 #' @return A plot object.
 #' @export
@@ -30,7 +32,6 @@ boxMSE <- function(res) {
              + scale_x_discrete(expression(paste("Type of estimator")))
              + scale_y_continuous(name=expression("Mean squared error"))
              + coord_flip()
-             + ggtitle(expression("Box plots of mean squared error"))
              + theme(  legend.position="none"
                      , axis.text = element_text(colour = "black"))
              )
@@ -38,6 +39,8 @@ boxMSE <- function(res) {
 }
 
 #' Plotting performance: Box plots for bias
+#'
+#' Box plots for the bias.
 #'
 #' @param res The collected results from a computer experiment.
 #' @return A plot object.
@@ -49,7 +52,6 @@ boxBias <- function(res) {
              + coord_flip()
              + scale_x_discrete(expression(paste("Type of estimator")))
              + scale_y_continuous(name=expression("Bias"))
-             + ggtitle(expression("Box plots of bias"))
              + theme(  legend.position="none"
                      , axis.text = element_text(colour = "black"))
              )
@@ -57,6 +59,8 @@ boxBias <- function(res) {
 }
 
 #' Plotting performance: Box plots for standard deviation
+#'
+#' Box plots for standard deviation.
 #'
 #' @param res The collected results from a computer experiment.
 #' @return A plot object.
@@ -68,7 +72,6 @@ boxSD <- function(res) {
              + coord_flip()
              + scale_x_discrete(expression(paste("Type of estimator")))
              + scale_y_continuous(name=expression("Standard deviation"))
-             + ggtitle(expression("Box plots of standard deviation"))
              + theme(  legend.position="none"
                      , axis.text = element_text(colour = "black"))
              )
@@ -81,8 +84,10 @@ boxSD <- function(res) {
 
 #' Plotting performance: Scatter plots against heterogeneity
 #'
+#' Scatter plots of heterogeneity and mean squared error.
+#'
 #' @param res The collected results from a computer experiment.
-#' @param ... further argumets to scale_y_continuous
+#' @param ... further arguments to scale_y_continuous
 #' @return A plot object.
 #' @export
 sctMSE <- function(res, ...) {
@@ -91,19 +96,11 @@ sctMSE <- function(res, ...) {
           + geom_hline(yintercept=0, size=.3, linetype=4)
           + scale_x_continuous(expression(tau))
           + scale_y_continuous(expression("Mean squared error"), ...)
-          + scale_shape_discrete(expression(paste(  "Type of "
-                                                  , tau
-                                                  , "-estimator")))
-          + scale_colour_discrete(expression(paste(  "Type of "
-                                                   , tau
-                                                   , "-estimator")))
-          + scale_linetype_discrete(expression(strwrap("Estimated
-                                                       regression
-                                                       line")))
+          + scale_shape_discrete(expression(paste("Type of ", tau, "-estimator")))
+          + scale_colour_discrete(expression(paste("Type of ", tau, "-estimator")))
+          + scale_linetype_discrete(expression("Estimated regression line"))
           + stat_smooth(  method="lm", se=FALSE, colour="black"
                         , aes(linetype=type))
-          + ggtitle(expression(strwrap("Scatter plots of heterogeneity
-                                       and mean squared error")))
           + theme(axis.text = element_text(colour = "black"))
           )
     return(p)
@@ -111,8 +108,10 @@ sctMSE <- function(res, ...) {
 
 #' Plotting performance: Scatter plots against heterogeneity
 #'
+#' Scatter plots of heterogeneity and bias.
+#'
 #' @param res The collected results from a computer experiment.
-#' @param ... further argumets to scale_y_continuous
+#' @param ... further arguments to scale_y_continuous
 #' @return A plot object.
 #' @export
 sctBias <- function(res, ...) {
@@ -121,19 +120,11 @@ sctBias <- function(res, ...) {
           + geom_hline(yintercept=0, size=.3, linetype=4)
           + scale_x_continuous(expression(tau))
           + scale_y_continuous(expression("Bias"), ...)
-          + scale_shape_discrete(expression(paste("Type of "
-                                                  , tau
-                                                  , "-estimator")))
-          + scale_colour_discrete(expression(paste("Type of "
-                                                   , tau
-                                                   , "-estimator")))
-          + scale_linetype_discrete(expression(strwrap("Estimated
-                                                       regression
-                                                       line")))
+          + scale_shape_discrete(expression(paste("Type of ", tau, "-estimator")))
+          + scale_colour_discrete(expression(paste("Type of ", tau, "-estimator")))
+          + scale_linetype_discrete(expression("Estimated regression line"))
           + stat_smooth(method="lm", se=FALSE, colour="black",
                         aes(linetype=type))
-          + ggtitle(expression(strwrap("Scatter plots of heterogeneity
-                                       and bias")))
           + theme(axis.text = element_text(colour = "black"))
           )
     return(p)
@@ -141,8 +132,10 @@ sctBias <- function(res, ...) {
 
 #' Plotting performance: Scatter plots against heterogeneity
 #'
+#' Scatter plots of heterogeneity and standard deviation.
+#'
 #' @param res The collected results from a computer experiment.
-#' @param ... further argumets to scale_y_continuous
+#' @param ... further arguments to scale_y_continuous
 #' @return A plot object.
 #' @export
 sctSD <- function(res, ...) {
@@ -155,16 +148,10 @@ sctSD <- function(res, ...) {
                                                   "-estimator")))
           + scale_colour_discrete(expression(paste("Type of ", tau,
                                                    "-estimator")))
-          + scale_linetype_discrete(expression(strwrap("Estimated
-                                                       regression
-                                                       line")))
+          + scale_linetype_discrete(expression("Estimated regression line"))
           + stat_smooth(method="lm", se=FALSE, colour="black",
                         aes(linetype=type))
-          + ggtitle(expression(strwrap("Scatter plots of heterogeneity
-                                       and standard deviation")))
           + theme(axis.text = element_text(colour = "black"))
           )
     return(p)
 }
-
-globalVariables()

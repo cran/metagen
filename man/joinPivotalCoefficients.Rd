@@ -5,9 +5,9 @@
   joinPivotalCoefficients(p0, p1)
 }
 \arguments{
-  \item{p0}{pivotal stream without adjustment}
+  \item{p0}{pivotal stream without adjustment.}
 
-  \item{p1}{pivatal stream with adjustment}
+  \item{p1}{pivatal stream with adjustment.}
 }
 \description{
   Pivotal distributions: Extract pivots for regression

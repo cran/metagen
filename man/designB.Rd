@@ -27,14 +27,14 @@
 }
 \description{
   Method for generating a sampling design for data
-  generation following a Binomial-Gaussian model.
+  generation following a binomial-Gaussian model.
 }
 \details{
   Generates a sampling design for the heterogeneity 'h',
   balancing factors 'a1', ..., 'ak' of group assignments,
   and study sizes 's1', ..., 'sk'.  This design can be used
   for testing methods for inference for the random effects
-  meta regression model, since the logarithm of relative
+  meta regression model since the logarithm of relative
   risks of each study is approximately Gaussian
   distributed. One may use methods that adjust for
   uncertainty in the heteroscedasticity estimates by

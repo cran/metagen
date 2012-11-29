@@ -16,8 +16,8 @@
 
 #' Pivotal distributions: Extract pivots for heterogeneity
 #'
-#' @param p0 pivotal stream without adjustment
-#' @param p1 pivatal stream with adjustment
+#' @param p0 pivotal stream without adjustment.
+#' @param p1 pivatal stream with adjustment.
 #' @examples
 #' bcg   <- bcgVaccineData()
 #' bcg_y <- bcg$logrisk
@@ -76,8 +76,8 @@ makePivotalData <- function (p) {
 
 #' Pivotal distributions: Extract pivots for regression coefficients
 #'
-#' @param p0 pivotal stream without adjustment
-#' @param p1 pivatal stream with adjustment
+#' @param p0 pivotal stream without adjustment.
+#' @param p1 pivatal stream with adjustment.
 #' @examples
 #' bcg   <- bcgVaccineData()
 #' bcg_y <- bcg$logrisk
@@ -133,13 +133,10 @@ joinPivotalCoefficients <- function (p0, p1) {
 plotDensityH <- function (pivh) {
     return( ggplot(pivh, aes(x=heterogeneity))
            + geom_density(aes(fill=type), alpha=.42)
+           + scale_fill_discrete(expression("Uncertainty in the\nheteroscedasticity\nhas been"))
            + xlab(expression(tau))
-           + scale_fill_brewer(  expression(atop(  "Uncertainty in the"
-                                                 , "heteroscedasticity"
-                                                 , "has been"))
-           , palette="Spectral")
-           + ggtitle(expression("Density estimates of generalised pivots
-                                for the heterogeneity"))
+           + ylab(expression("Density"))
+           + theme(axis.text = element_text(colour = "black"))
            )
 }
 
@@ -164,15 +161,13 @@ plotDensityH2 <- function (pivh) {
            + geom_histogram(aes(y=..density.., fill=..count..),
                             alpha=.65)
            + geom_density()
-           + scale_fill_gradient(expression(atop(  "Counts within the"
-                                                 , "respected bin"))
-                                 , low="darkblue", high="darkgreen"
+           + scale_fill_gradient(expression("Counts within the\nrespected bin")
+                                 , low="darkblue", high="green"
                                  )
            + xlab(expression(tau))
+           + ylab(expression("Density"))
+           + theme(axis.text = element_text(colour = "black"))
            + facet_wrap(~type, ncol=1)
-           + ggtitle(expression(strwrap("Density estimates of a
-                                        generalised pivot for the
-                                        heterogeneity")))
            )
 }
 
@@ -200,12 +195,11 @@ plotDensityH2 <- function (pivh) {
 plotDensityIntercept <- function (pivr) {
     return( ggplot(pivr, aes(x=intercept))
            + geom_density(aes(fill=via), alpha=.42)
-           + xlab(expression("intercept"))
-           + scale_fill_brewer(palette="Spectral")
-           + facet_grid(~type, scales="free")
-           + ggtitle(expression(strwrap("Density estimates of
-                                        generalised pivots for the
-                                        regression intercept")))
+           + scale_fill_discrete(expression("Using"))
+           + xlab(expression("Intercept"))
+           + ylab(expression("Density"))
+           + theme(axis.text = element_text(colour = "black"))
+           + facet_grid(~type)
            )
 }
 
@@ -233,13 +227,11 @@ plotDensityIntercept <- function (pivr) {
 plotDensitySlope <- function (pivr) {
     return( ggplot(pivr, aes(x=slope))
            + geom_density(aes(fill=via), alpha=.42)
-           + xlab(expression("slope"))
-           + scale_fill_brewer(  expression("using")
-                               , palette="Spectral")
-           + facet_grid(~type, scales="free")
-           + ggtitle(expression(strwrap("Density estimates of
-                                        generalised pivots for the
-                                        regression slope")))
+           + scale_fill_discrete(expression("Using"))
+           + xlab(expression("Slope"))
+           + ylab(expression("Density"))
+           + theme(axis.text = element_text(colour = "black"))
+           + facet_grid(~type)
            )
 }
 
@@ -267,15 +259,11 @@ plotDensitySlope <- function (pivr) {
 plotDensityIntercept2 <- function (pivr) {
     return( ggplot(pivr, aes(x=intercept))
            + geom_density(aes(fill=type), alpha=.42)
-           + xlab(expression("slope"))
-           + scale_fill_brewer(  expression(atop(  "Uncertainty in the"
-                                                 , "heteroscedasticity"
-                                                 , "has been"))
-                               , palette="Spectral")
-           + facet_grid(~via, scales="free")
-           + ggtitle(expression(strwrap("Density estimates of
-                                        generalised pivots for the
-                                        regression slope")))
+           + scale_fill_discrete(expression("Uncertainty in the\nheteroscedasticity\nhas been"))
+           + xlab(expression("Intercept"))
+           + ylab(expression("Density"))
+           + theme(axis.text = element_text(colour = "black"))
+           + facet_grid(~via)
            )
 }
 
@@ -303,16 +291,10 @@ plotDensityIntercept2 <- function (pivr) {
 plotDensitySlope2 <- function (pivr) {
     return( ggplot(pivr, aes(x=slope))
            + geom_density(aes(fill=type), alpha=.42)
-           + xlab(expression("slope"))
-           + scale_fill_brewer(  expression(atop(  "Uncertainty in the"
-                                                 , "heteroscedasticity"
-                                                 , "has been"))
-                               , palette="Spectral")
-           + facet_grid(~via, scales="free")
-           + ggtitle(expression(strwrap("Density estimates of
-                                        generalised pivots for the
-                                        regression slope")))
+           + scale_fill_discrete(expression("Uncertainty in the\nheteroscedasticity\nhas been"))
+           + xlab(expression("Slope"))
+           + ylab(expression("Density"))
+           + theme(axis.text = element_text(colour = "black"))
+           + facet_grid(~via)
            )
 }
-
-globalVariables()

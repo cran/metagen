@@ -5,18 +5,18 @@
   formulaR(y, d, h, g, x)
 }
 \arguments{
-  \item{y}{: k-vector of responses}
+  \item{y}{k-vector of responses.}
 
-  \item{d}{: k-vector of heteroscedasticity}
+  \item{d}{k-vector of heteroscedasticity.}
 
-  \item{h}{: scalar of heterogeneity}
+  \item{h}{scalar of heterogeneity.}
 
-  \item{g}{: p-vector of some p-variate Gaussian draw}
+  \item{g}{p-vector of some p-variate Gaussian draw.}
 
-  \item{x}{: design k-p-matrix}
+  \item{x}{design k-p-matrix.}
 }
 \value{
-  A p-vector
+  A p-vector.
 }
 \description{
   Calculate pivotal quantities for the regression
@@ -27,7 +27,7 @@
   Algorithm for calculating a single generalised pivotal
   quantity for the regression coefficients for given
   generalised pivotal quantities for the heterogeneity
-  using the univariate version of the pivotal formula.
+  using the multivariate version of the pivotal formula.
 }
 \examples{
 bcg   <- bcgVaccineData()
@@ -35,7 +35,7 @@ bcg_y <- bcg$logrisk
 bcg_d <- bcg$sdiv
 bcg_x <- cbind(1,bcg$x)
 
-# When for example using the Mandel-Paule estimate:
+# When, for example, using the Mandel-Paule estimate:
 bcg_h <- pfunc(y=bcg_y, d=bcg_d, x=bcg_x)(dim(bcg_x)[1] -
   dim(bcg_x)[2])
 

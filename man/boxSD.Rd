@@ -12,6 +12,6 @@
   A plot object.
 }
 \description{
-  Plotting performance: Box plots for standard deviation
+  Box plots for standard deviation.
 }
 

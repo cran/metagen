@@ -6,13 +6,13 @@ maximum likelihood.}
   metareg(y, d, x, sgnf)
 }
 \arguments{
-  \item{y}{k-vector of study responses}
+  \item{y}{k-vector of study responses.}
 
-  \item{d}{k-vector of heteroscedasticity}
+  \item{d}{k-vector of heteroscedasticity.}
 
-  \item{x}{design k-p-matrix}
+  \item{x}{design k-p-matrix.}
 
-  \item{sgnf}{significance levels}
+  \item{sgnf}{significance levels.}
 }
 \value{
   The same return type as the skeleton 'metagenEmpty()'.
@@ -36,6 +36,8 @@ set.seed(865287113) # for reproducibility
 c1 <- metareg(y=bcg_y, d=bcg_d, x=bcg_x, sgnf=0.025)
 c2 <- metareg(y=bcg_y, d=bcg_d, x=bcg_x, sgnf=sgnf_lev)
 
+# When performing a meta analysis, provide the function
+# with a vector of 1s.
 if (!all(names(c1) == names(metagenEmpty()))) stop("Name clash")
 if (!all(names(c2) == names(metagenEmpty()))) stop("Name clash")
 }

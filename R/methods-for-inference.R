@@ -51,10 +51,7 @@ qfunc2 <- function (  y   # study responses
 
 #' The q_delta(tau) function.
 #'
-#' Returns the q-function, in the form of the so-far fastest version
-#' tested.
-#'
-#' FIXME: Performance may be improved further!
+#' Returns the q-function.
 #'
 #' @param y study responses.
 #' @param d heteroscedasticity.
@@ -83,7 +80,7 @@ qfunc <- function (  y # study responses
 
 #' The p_delta(eta) function.
 #'
-#' Returns the p-function. (fastest version tested)
+#' Returns the p-function.
 #'
 #' @param y study responses.
 #' @param d heteroscedasticity.
@@ -132,12 +129,12 @@ pfunc <- function ( y   # study responses
 #' quantities for the heterogeneity using the univariate version
 #' of the pivotal formula.
 #'
-#' @param y k-vector of responses
-#' @param d k-vector of heteroscedasticity
-#' @param h scalar of heterogeneity
-#' @param g p-vector of some p-variate Gaussian draw
-#' @param x design k-p-matrix
-#' @return A p-vector
+#' @param y k-vector of responses.
+#' @param d k-vector of heteroscedasticity.
+#' @param h scalar of heterogeneity.
+#' @param g p-vector of some p-variate Gaussian draw.
+#' @param x design k-p-matrix.
+#' @return A p-vector.
 #' @examples
 #' bcg   <- bcgVaccineData()
 #' bcg_y <- bcg$logrisk
@@ -183,24 +180,24 @@ formulaL <- function ( y # k-vector of responses
 #' Calculate pivotal quantities for the regression coefficients
 #' using the method: formulaR form the dissertation.
 #'
-#' Algorithm for calculating a single generalised pivotal quantity
-#' for the regression coefficients for given generalised pivotal
-#' quantities for the heterogeneity using the univariate version
-#' of the pivotal formula.
+#' Algorithm for calculating a single generalised pivotal quantity for
+#' the regression coefficients for given generalised pivotal quantities
+#' for the heterogeneity using the multivariate version of the pivotal
+#' formula.
 #'
-#' @param y : k-vector of responses
-#' @param d : k-vector of heteroscedasticity
-#' @param h : scalar of heterogeneity
-#' @param g : p-vector of some p-variate Gaussian draw
-#' @param x : design k-p-matrix
-#' @return A p-vector
+#' @param y k-vector of responses.
+#' @param d k-vector of heteroscedasticity.
+#' @param h scalar of heterogeneity.
+#' @param g p-vector of some p-variate Gaussian draw.
+#' @param x design k-p-matrix.
+#' @return A p-vector.
 #' @examples
 #' bcg   <- bcgVaccineData()
 #' bcg_y <- bcg$logrisk
 #' bcg_d <- bcg$sdiv
 #' bcg_x <- cbind(1,bcg$x)
 #'
-#' # When for example using the Mandel-Paule estimate:
+#' # When, for example, using the Mandel-Paule estimate:
 #' bcg_h <- pfunc(y=bcg_y, d=bcg_d, x=bcg_x)(dim(bcg_x)[1] -
 #'   dim(bcg_x)[2])
 #'
@@ -248,10 +245,10 @@ formulaR <- function ( y # k-vector of responses
 #' Steams of pivotal quantities of the regression coefficient
 #'
 #' Algorithm for generating a steam of generalised pivotal quantities
-#' for the regression coefficients.  If adjusted=FALSE, then not
-#' adjusting for uncertainty in the heteroscedasticity estimates d.
-#' If adjusted=TRUE, then adjusted.  In this case, 's' need to be
-#' provided.
+#' for the regression coefficients.  If adjusted=FALSE, then no
+#' adjustments are made for the uncertainty in the heteroscedasticity
+#' estimates d.  If adjusted=TRUE, then adjustments are performed.  In
+#' this case, 's' needs to be provided.
 #'
 #' @param n      length of stream.
 #' @param y      k-vector of responses.
@@ -362,11 +359,11 @@ pivotalStream <- function (  n      # length of stream.
 #' g4 <- metagenGeneralised(y=bcg_y, d=bcg_d, x=bcg_x, sgnf=sgnf_lev,
 #'   s=bcg_s, n=50, adj=TRUE)
 #'
-#' # The implementation can also handle the case, in which
-#' # a meta regression is planed with no intercept, and only a
+#' # The implementation can also handle the case in which
+#' # a meta regression is planed with no intercept and only a
 #' # single covariate (i.e. dim(x) = 1).  In this case,
 #' # the design matrix can simply be provided by a vector.
-#' # (This makes no sense in this example and shall only proofs
+#' # (This makes no sense in this example and shall only proves
 #' # feasibility)
 #' g5 <- metagenGeneralised(y=bcg_y, d=bcg_d, x=bcg$x, sgnf=0.025, n=50)
 #'
@@ -388,7 +385,7 @@ metagenGeneralised <- function (  y      # k-vector of responses.
                                 , sgnf   # vector of significance levels
                                 , s=NULL # k-vector of study responses
                                 , n      # draws of pivotal distribution
-                            , method=list("univariate", "multivariate")
+                                , method=list("univariate", "multivariate")
                                 , adjusted=FALSE # TRUE or FALSE
                                 ) {
     if (is.vector(x)) {x <- as.matrix(x, ncol=1)}
@@ -459,15 +456,16 @@ tryFunc <- function ( func ) {
 #' Point estimates: For the heterogeneity parameter
 #'
 #' Returns a list of tau estimates based on different approximative
-#' methods, namely
-#'
-#' HD   -- Hedges
-#' SL   -- DerSimonian-Laird
-#' SJ   -- Sidik-Jonkman
-#' MP   -- Mandel-Paule (FIXME: I am missing yet!)
-#' ML   -- maximum likelihood
-#' REML -- restricted maximum-likelihood
-#'
+#' methods.
+
+#' Different point estimates for the heterogeneity parameter are
+#' calculated:
+#' HD    (Hedges),
+#' SL    (DerSimonian-Laird),
+#' SJ    (Sidik-Jonkman),
+#' MP    (Mandel-Paule),
+#' ML    (maximum likelihood),
+#' REML  (restricted maximum-likelihood).
 #' Since any of these methods may fail to converge,
 #' there result may be 'NA' in this case.
 #'
@@ -483,11 +481,11 @@ tryFunc <- function ( func ) {
 #' bcg_x <- cbind(1,bcg$x)
 #' hEstimates(y=bcg_y, d=bcg_d, x=bcg_x)
 #'
-#' # The implementation can also handle the case, in which
-#' # a meta regression is planed with no intercept, and only a
+#' # The implementation can also handle the case in which
+#' # a meta regression is planed with no intercept and only a
 #' # single covariate (i.e. dim(x) = 1).  In this case,
 #' # the design matrix can simply be provided by a vector.
-#' # (This makes no sense in this example and shall only proofs
+#' # (This makes no sense in this example and shall only prove
 #' # feasibility)
 #' hEstimates(y=bcg_y, d=bcg_d, x=bcg$x)
 #'
@@ -515,7 +513,7 @@ hEstimates <- function (  y    # study responses
     tauREML <- data.frame(type="restricted maximum-likelihood"
                           , h=tryFunc(rma(y, d, mods=x, method="REML"
                                           , intercept=FALSE)$tau2))
-    tauMP <- data.frame(type="Mandel-Paul",
+    tauMP <- data.frame(type="Mandel-Paule",
                         h=pfunc(y=y,d=d,x=x)(dim(x)[1] - dim(x)[2]))
     return(rbind(tauHE,tauDL,tauSJ,tauMP,tauML,tauREML))
 }
@@ -576,20 +574,19 @@ regressionEstimates <- function (  y
 
 #' Interval estimates: Generic function
 #'
-#' Generic function to produce interval estimates of
-#' univariate parameters based on first order limit theory.
+#' Generic function to produce interval estimates of univariate
+#' parameters based on first order limit theory.
 #'
-#' Function for symmetric confidence intervals
-#' based on standard deviations, point
-#' estimates and quantile functions.
+#' Function for symmetric confidence intervals based on standard
+#' deviations, point estimates, and quantile functions.
 #'
 #' Can only handle a single significance level!  See
-#' 'makeConfInts' for a more flexible function.
-#' @param sgn   one significance level
-#' @param pst   point estimate
-#' @param fct   standard error
-#' @param crt   function for critical value computation
-#' @param name  string: name of the method
+#' 'makeConfInts' for a more flexible solution.
+#' @param sgn   one significance level.
+#' @param pst   point estimate.
+#' @param fct   standard error.
+#' @param crt   function for critical value computation.
+#' @param name  string: name of the method.
 #' @export
 makeConfInt <- function(  sgn  # one significance level
                         , pst  # point estimate
@@ -613,14 +610,14 @@ makeConfInt <- function(  sgn  # one significance level
 #' Generic function to produce interval estimates of
 #' univariate parameters based on first order limit theory.
 #'
-#' Function for symmetric confidence intervals
-#' based on standard deviations, point
-#' estimates and quantile functions.
-#' @param sgn   one significance level
-#' @param pst   point estimate
-#' @param fct   standard error
-#' @param crt   function for critical value computation
-#' @param name  string: name of the method
+#' Function for symmetric confidence intervals based on standard
+#' deviations, point estimates, and quantile functions.
+#'
+#' @param sgn   one significance level.
+#' @param pst   point estimate.
+#' @param fct   standard error.
+#' @param crt   function for critical value computation.
+#' @param name  string: name of the method.
 #' @export
 makeConfInts <- function(  sgn  # vector of significance levels
                          , pst  # point estimate
@@ -644,8 +641,7 @@ intervalEstimates_OneSgnf <- function (  y    # study responses
                                        , sgnf # significance levels
                                        ) {
     ## Confidence intervals based on first order limit theory.
-    ## FIXME: I could also put the point estimates in the return.
-    # point estimate
+    ## TODO: I could also put the point estimates in the return.
     By    <- coeffEstimates(y=y,d=d,h=h,x=x)
     # factors, standard errors and adjustments
     Vinv <- ginv(t(x) %*% diag(1/(h+d)) %*% x)
@@ -659,21 +655,21 @@ intervalEstimates_OneSgnf <- function (  y    # study responses
     classic    <- makeConfInts(sgn=sgnf, pst=By, fct=Cfct
                        , crt=qnorm, "unadjusted likelihood")
     knappAdjst <- makeConfInts(sgn=sgnf, pst=By, fct=Afct
-                       , crt=crt, "Knapp/Hartung adjustment")
+                       , crt=crt, "Knapp-Hartung adjustment")
     knappAdhoc <- makeConfInts(sgn=sgnf, pst=By, fct=Kfct
-                       , crt=crt, "Knapp/Hartung ad hoc improvement")
+                       , crt=crt, "Knapp-Hartung ad hoc improvement")
     confints   <- rbind(classic, knappAdjst, knappAdhoc)
-    confints$h <- names(h)
+    confints$h <- names(h) # Don't need this line
     return(confints)
 }
 
 #' Interval estimates: For the regression coefficients
 #'
-#' @param y      study responses
-#' @param d      heteroscedasticity
-#' @param h_dat  data frame of tau estimates
-#' @param x      design matrix
-#' @param sgnf   significance levels
+#' @param y      study responses.
+#' @param d      heteroscedasticity.
+#' @param h_dat  data frame of tau estimates.
+#' @param x      design matrix.
+#' @param sgnf   significance levels.
 #' @examples
 #' bcg   <- bcgVaccineData()
 #' bcg_y <- bcg$logrisk
@@ -707,10 +703,10 @@ intervalEstimates <- function (  y     # study responses
 #' Calculates the so called Q-profiling confidence interval for
 #' the heterogeneity for data following a random effects meta
 #' regression model.
-#' @param y    k-vector of study responses
-#' @param d    k-vector of heteroscedasticity
-#' @param x    design k-p-matrix
-#' @param sgnf significance levels
+#' @param y k-vector of study responses.
+#' @param d k-vector of heteroscedasticity.
+#' @param x design k-p-matrix.
+#' @param sgnf significance levels.
 #' @return A data frame containing the bounds of the interval estimate.
 #' @examples
 #' bcg   <- bcgVaccineData()
@@ -746,10 +742,10 @@ hConfidence <- function (  y    # k-vector of study responses
 #' of the random effects meta regression model based on the given
 #' data.
 #'
-#' @param y    k-vector of study responses
-#' @param d    k-vector of heteroscedasticity
-#' @param x    design k-p-matrix
-#' @param sgnf significance levels
+#' @param y    k-vector of study responses.
+#' @param d    k-vector of heteroscedasticity.
+#' @param x    design k-p-matrix.
+#' @param sgnf significance levels.
 #' @return The same return type as the skeleton 'metagenEmpty()'.
 #' @examples
 #' bcg   <- bcgVaccineData()
@@ -764,6 +760,8 @@ hConfidence <- function (  y    # k-vector of study responses
 #' c1 <- metareg(y=bcg_y, d=bcg_d, x=bcg_x, sgnf=0.025)
 #' c2 <- metareg(y=bcg_y, d=bcg_d, x=bcg_x, sgnf=sgnf_lev)
 #'
+#' # When performing a meta analysis, provide the function
+#' # with a vector of 1s.
 #' if (!all(names(c1) == names(metagenEmpty()))) stop("Name clash")
 #' if (!all(names(c2) == names(metagenEmpty()))) stop("Name clash")
 #' @export
@@ -772,6 +770,7 @@ metareg <- function (  y    # k-vector of study responses
                      , x    # design k-p-matrix
                      , sgnf # significance levels
                      ) {
+    if (is.vector(x)) {x <- as.matrix(x, ncol=1)}
     h_dat  <- hEstimates(y,d,x)
     # pointr may include an empty data frame for NA h-estimates.
     pointr <- regressionEstimates(y,d,h_dat,x)
@@ -803,14 +802,14 @@ metagenEmpty <- function () {
 #' Runs all implemented methods and combines them
 #' in a neat summary.
 #'
-#' @param y      : k-vector of responses.
-#' @param d      : k-vector of heteroscedasticities.
-#' @param x      : design k-p-matrix.
-#' @param sgnf   : vector of significance levels.
-#' @param s      : k-vector of study responses. Default is NULL. If
+#' @param y       k-vector of responses.
+#' @param d       k-vector of heteroscedasticities.
+#' @param x       design k-p-matrix.
+#' @param sgnf    vector of significance levels.
+#' @param s       k-vector of study responses. Default is NULL. If
 #' 'adjusted=TRUE', this value needs to be given.
-#' @param n      : draws from the pivotal distribution.
-#' @param method : Default is 'list("univariate", "multivariate")'.
+#' @param n      draws from the pivotal distribution.
+#' @param method Default is 'list("univariate", "multivariate")'.
 #' @param adjusted : TRUE or FALSE
 #' @return The same return type as the skeleton 'metagenEmpty()'.
 #' @examples

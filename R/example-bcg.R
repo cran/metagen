@@ -16,12 +16,13 @@
 
 #' Example: Setting up the BCG-data set
 #'
-#' Reads in the bcg vaccine efficacy data from the metafor package and
-#' adds some statistics to the data such as the log-relative risk, study
-#' size, measurements of balance, 0.025-confidence intervals of the
-#' responses, and the like.
+#' Exemplary data set of 14 clinical trials evaluating BCG vaccine
+#' efficacy.
 #'
-#' Finally, the set is ordered by the column absolute latitude 'x'.
+#' Reads in the BCG vaccine efficacy data from the metafor package and
+#' adds some statistics to the data such as the log-relative risk, study
+#' size, measurements of balance, confidence intervals of the responses,
+#' and the like.
 #'
 #' @param sgnf significance level of the confidence intervals for the
 #' relative risks.
@@ -43,8 +44,8 @@ bcgVaccineData <- function (sgnf=0.05) {
     tmp_size    = tmp_size_t + tmp_size_c
     tmp_balance = (tmp_size_t - tmp_size_c) / tmp_size
 
-    bcg_dat <- data.frame(  reference= paste(dat$author, dat$year,
-                                             sep=", ")  # author
+    bcg_dat <- data.frame(
+      reference= paste(gsub("et al", "et al.", dat$author), dat$year, sep=", ")
     , x=         dat$ablat
     , size=      tmp_size
     , balance=   tmp_balance
@@ -79,7 +80,6 @@ plotStudySizes <- function(dat) {
            + scale_y_continuous(expression("Total number of subjects"))
            + coord_flip()
            + theme(axis.text = element_text(colour = "black"))
-           + ggtitle("Differences in total study size")
            )
 }
 
@@ -96,7 +96,6 @@ plotStudyUnbalance <- function(dat) {
            + scale_y_continuous(expression(frac(v-neg(v), v+neg(v))))
            + coord_flip()
            + theme(axis.text = element_text(colour = "black"))
-           + ggtitle("Differences in treatment assignments")
            )
 }
 
@@ -115,12 +114,9 @@ plotStudyForest <- function(dat) {
            + geom_pointrange(shape=15, size=1)
            + geom_hline(yintercept=0, size=.3)
            + scale_x_discrete("")
-           + scale_y_continuous("logarithm of relative risk")
+           + scale_y_continuous("Logarithm of relative risk")
            + coord_flip()
            + theme(axis.text = element_text(colour = "black"))
-           + ggtitle(expression(strwrap("Forest plot of 95% confidence
-                                        intervals for the log relative
-                                        risk")))
            )
 }
 
@@ -159,7 +155,9 @@ plotStudyQfuncPfunc <- function (  y # a vector of responses.
                   + geom_hline(yintercept=0)
                   + geom_vline(xintercept=0)
                   + scale_x_continuous(expression(tau))
-                  + scale_y_continuous(expression(q[delta](tau))))
+                  + scale_y_continuous(expression(q[delta](tau)))
+                  + theme(axis.text = element_text(colour = "black"))
+                  )
 
     plotPfunc1 <- ( qplot(c(0,exp(findk)), c(0,0), geom="blank")
                    + stat_function(fun = qfu, colour="brown", n=n)
@@ -167,14 +165,18 @@ plotStudyQfuncPfunc <- function (  y # a vector of responses.
                    + geom_vline(xintercept=0)
                    + scale_x_continuous(expression(p[delta](eta)))
                    + scale_y_continuous(expression(eta))
-                   + coord_flip())
+                   + coord_flip()
+                   + theme(axis.text = element_text(colour = "black"))
+                   )
 
     plotPfunc2 <- ( qplot(c(0,qfu(0)), c(0,0), geom="blank")
                    + stat_function(fun = pfu, colour="brown", n=n)
                    + geom_hline(yintercept=0)
                    + geom_vline(xintercept=0)
                    + scale_x_continuous(expression(eta))
-                   + scale_y_continuous(expression(p[delta](eta))))
+                   + scale_y_continuous(expression(p[delta](eta)))
+                   + theme(axis.text = element_text(colour = "black"))
+                   )
 
     return(list(plotQ=plotQfunc, plotP=plotPfunc1,
                 plotP_debug=plotPfunc2))
@@ -196,7 +198,8 @@ plotIntervalEstimates <- function (cnf) {
     + scale_x_discrete(name="")
     + geom_hline(yintercept=0, size=.3)
     + coord_flip()
-    + facet_grid(confidence ~ .))
+    + facet_grid(confidence ~ .)
+    + ylab("Density")
+    + theme(axis.text = element_text(colour = "black"))
+    )
 }
-
-globalVariables()

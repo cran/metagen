@@ -9,22 +9,21 @@
   example, the return value of the computer experiments
   'experimentY', 'experimentD'.}
 
-  \item{b}{true regression coefficients}
+  \item{b}{true regression coefficients.}
 
-  \item{h}{true heterogeneity}
+  \item{h}{true heterogeneity.}
 }
 \value{
-  Data frame containing performance measuments of inference
-  methods based on the results of the computer experiment
-  given by 'results'.
+  Data frame containing performance measurements of
+  inference methods based on the results of the computer
+  experiment given by 'results'.
 }
 \description{
   Adding performance measures to the results
 }
 \details{
   Calculating performance measurements from a computer
-  experiment for analysis data from a random effects meta
-  regression model.
+  experiment.
 }
 \examples{
 h_test <- 0.03
