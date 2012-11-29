@@ -1,0 +1,5 @@
+export(metagen)
+export(metagen2)
+import(BBmisc)
+import(MASS)
+import(plyr)
